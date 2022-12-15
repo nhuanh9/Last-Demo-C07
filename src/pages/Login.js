@@ -8,16 +8,16 @@ export default function Login() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const handleLogin = (values) => {
-        dispatch(loginUser(values))
-        navigate('/home')
+    const handleLogin = async (values) => {
+        await dispatch(loginUser(values))
+        await navigate('/home')
     }
     return (
         <div className={'row'}>
             <div className="offset-3 col-6 mt-5">
                 <h1 style={{textAlign: 'center'}}>Login</h1>
                 <Formik initialValues={{username: '', password: ''}} onSubmit={(values) => {
-                    handleLogin(values)
+                    handleLogin(values).then()
                 }}>
                     <Form>
                         <div className="form-group">
