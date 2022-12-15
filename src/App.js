@@ -12,16 +12,25 @@ import {useEffect} from "react";
 import {getBlogs} from "./services/blogsService";
 
 function App() {
+    const user = useSelector(state => {
+        console.log(state.user.user)
+        return state.user.user
+    })
     return (
         <>
             <div className='container-fluid'>
                 <Routes>
                     <Route path={''} element={<Login/>}/>
                     <Route path={'register'} element={<Register/>}/>
-                    <Route path={'home'} element={<Home/>}>
-                        <Route path={''} element={<ListBlog/>}></Route>
-                        <Route path={'add-blog'} element={<AddBlog/>}></Route>
-                    </Route>
+                    {
+                        user != null ?
+                            <Route path={'home'} element={<Home/>}>
+                                <Route path={''} element={<ListBlog/>}></Route>
+                                <Route path={'add-blog'} element={<AddBlog/>}></Route>
+                            </Route>
+                            :
+                            <Route path="*" element={<Login/>}/>
+                    }
                 </Routes>
             </div>
         </>
