@@ -1,10 +1,11 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {getBlogs} from "../services/blogsService";
 
 export default function Navbar() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const user = useSelector(state => {
         return state.user.user
     })
@@ -29,13 +30,14 @@ export default function Navbar() {
                             </ul>
                         </div>
 
-                        <form className="form-inline my-2 my-lg-0">
+                        <div className="form-inline my-2 my-lg-0">
                             {user.username}
-                            <Link to={'/'}>
-                                <button className=" ml-3 btn btn-outline-danger my-2 my-sm-0" type="submit">Logout
+                                <button className=" ml-3 btn btn-outline-danger my-2 my-sm-0" type="submit" onClick={()=> {
+                                    localStorage.clear()
+                                    navigate('/')
+                                }}>Logout
                                 </button>
-                            </Link>
-                        </form>
+                        </div>
                     </nav>
                 </div>
             </div>
