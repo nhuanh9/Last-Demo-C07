@@ -16,9 +16,8 @@ export default function Login() {
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
                     <button type="submit" className="ml-3 btn btn-secondary">
-                        <Link to={'register'} style={{textDecoration:'none', color:'white'}}>Register</Link>
+                        <Link to={'register'} style={{textDecoration: 'none', color: 'white'}}>Register</Link>
                     </button>
-
                 </form>
             </div>
         </div>
