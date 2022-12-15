@@ -1,6 +1,13 @@
 import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import {getBlogs} from "../services/blogsService";
 
 export default function Navbar() {
+    const dispatch = useDispatch();
+    const user = useSelector(state => {
+        return state.user.user
+    })
     return (
         <>
             <div className="row">
@@ -23,8 +30,10 @@ export default function Navbar() {
                         </div>
 
                         <form className="form-inline my-2 my-lg-0">
+                            {user.username}
                             <Link to={'/'}>
-                                <button className="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>
+                                <button className=" ml-3 btn btn-outline-danger my-2 my-sm-0" type="submit">Logout
+                                </button>
                             </Link>
                         </form>
                     </nav>

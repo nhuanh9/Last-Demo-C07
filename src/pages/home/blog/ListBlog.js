@@ -1,13 +1,15 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {getBlogs} from "../../../services/blogsService";
+import {loginUser} from "../../../services/userService";
 
 export default function ListBlog() {
-
     const dispatch = useDispatch();
     const blogs = useSelector(state => {
-        console.log(state)
         return state.blogs.blogs;
+    })
+    const user = useSelector(state => {
+        return state.user.user
     })
     useEffect(() => {
         dispatch(getBlogs());
@@ -26,14 +28,18 @@ export default function ListBlog() {
                     </thead>
                     <tbody>
                     {
-                        blogs.map((item, index) => (
-                            <tr>
-                                <th scope="row">{index+1}</th>
-                                <td>{item.title}</td>
-                                <td>{item.content}</td>
-                                <td>{item.user.username}</td>
-                            </tr>
-                        ))
+                        blogs.map((item, index) => {
+                            if (item.user.username == user.username)
+                                return (
+                                    <tr>
+                                        <th scope="row">{index + 1}</th>
+                                        <td>{item.title}</td>
+                                        <td>{item.content}</td>
+                                        <td>{item.user.username}</td>
+                                    </tr>
+                                )
+                            else return (<></>)
+                        })
                     }
                     </tbody>
                 </table>
